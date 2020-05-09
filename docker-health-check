@@ -1,0 +1,6 @@
+## Creates a health-check container
+docker container run --name p2 -d -e POSTGRES_PASSWORD=mysecretpassword  \
+--health-cmd="pg_isready -U postgres || exit 1" postgres
+
+docker service create --name p4 -d -e POSTGRES_PASSWORD=mysecretpassword  \
+--health-cmd="pg_isready -U postgres || exit 1" postgres

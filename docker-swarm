@@ -1,0 +1,50 @@
+## Initialized docker swarm
+docker swarm init
+
+## Lists nodes from docker swarm
+docker node ls
+
+docker service create alpine ping 8.8.8.8
+
+## Checks details from a service
+docker service ps <name>
+
+docker service update jtg --replicas 3
+
+## Check commands from docker service
+docker service update --help
+
+## Checks the docker-machine version
+docker-machine version
+
+## Docker Swarm in the cloud example
+docker swarm init --advertise-addr 157.245.35.237
+
+## The get the join code and run it on the other node
+
+## Transforms the node into reachable - scales the node
+docker node update --role manager node2
+
+Or docker service scale
+
+docker swarm join-token manager
+
+## Create services with 3 replicas with docker swarm
+docker service create --replicas 3 alpine ping 8.8.8.8
+
+## Use stack for running docker-compose files
+docker stack
+
+## Visualize a service stack
+docker stack services voteapp
+
+docker stack ps voteapp
+
+## Creating a secret
+docker secret create psql_user psql_user.txt
+
+echo "mydbpassword" | docker secret create psql_pass -
+
+docker secret ls
+
+

@@ -1,0 +1,8 @@
+## Creates a network
+docker network create --driver overlay mydrupal
+
+## Lists networks
+docker network ls
+
+## Connect a container to a network - works for multiple networks
+docker network connect backend <container-id|container-name>

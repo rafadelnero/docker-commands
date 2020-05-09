@@ -1,0 +1,6 @@
+
+## Retrieves basic information
+docker info
+
+## Shows the version
+docker version

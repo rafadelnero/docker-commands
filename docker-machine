@@ -1,0 +1,8 @@
+## Virtual box is necessary for running docker-machine commands
+
+docker-machine create node1
+
+docker-machine ssh node1
+
+## Check machines status
+docker-machine env node1

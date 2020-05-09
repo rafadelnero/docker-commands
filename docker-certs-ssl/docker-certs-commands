@@ -1,0 +1,31 @@
+mkdir /etc/docker/certs.d
+mkdir /etc/docker/certs.d/127.0.0.1:5000
+cp $(pwd)/certs/domain.crt /etc/docker/certs.d/127.0.0.1:5000/ca.crt
+
+pkill dockerd
+dockerd > /dev/null 2>&1 &
+
+
+mkdir registry-data
+docker run -d -p 5000:5000 --name registry \
+  --restart unless-stopped \
+  -v $(pwd)/registry-data:/var/lib/registry -v $(pwd)/certs:/certs \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=certs/domain.key \
+  registry
+
+
+docker kill registry
+docker rm registry
+
+docker run -d -p 5000:5000 --name registry \
+  --restart unless-stopped \
+  -v $(pwd)/registry-data:/var/lib/registry \
+  -v $(pwd)/certs:/certs \
+  -v $(pwd)/auth:/auth \
+  -e REGISTRY_HTTP_TLS_CERTIFICATE=certs/domain.crt \
+  -e REGISTRY_HTTP_TLS_KEY=certs/domain.key \
+  -e REGISTRY_AUTH=htpasswd \
+  -e "REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm" \
+  -e "REGISTRY_AUTH_HTPASSWD_PATH=$(pwd)/auth/htpasswd" \
+  registry

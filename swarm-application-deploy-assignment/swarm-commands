@@ -1,0 +1,39 @@
+docker network create --driver overlay frontend
+docker network create --driver overlay backend
+
+## Running vote application
+docker service create --name vote -d --replicas 3 \
+--network frontend -p 80:80 bretfisher/examplevotingapp_vote
+
+## Running redis cache
+docker service create --name redis -d --network frontend redis:3.2
+
+## Running worker java application
+docker service create --name worker -d --network frontend --network backend \
+bretfisher/examplevotingapp_worker:java
+
+## Connecting the worker application to the backend too
+docker network connect backend worker
+
+## Running postgres db
+docker service create --name db \
+--mount type=volume,source=db-data,target=/var/lib/postgresql/data \
+-e POSTGRES_PASSWORD=   \
+-e POSTGRES_HOST_AUTH_METHOD=trust           \
+--network backend -d postgres:9.4
+
+## Running the result app
+docker service create --name result -p 5001:80 --network backend bretfisher/examplevotingapp_result
+
+## Running the whole application with docker stack command
+
+## Add first the docker-compose file into the server
+vim voting-app-stack.yml
+
+## Then deploy it
+docker stack deploy -c voting-app-stack.yml voteapp
+
+## Use the following commands to check the stack
+docker stack services voteapp
+docker stack ps voteapp
+

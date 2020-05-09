@@ -1,0 +1,13 @@
+Containers should be ephemeral or immutable
+
+To manipulate data we have to use the concept of VOLUME
+
+Docker machine is a virtual machine
+
+We should use version 2 of docker-compose for local development and 3 for the cloud
+
+The overlay network driver is used for container communication across a swarm.
+
+$(pwd) == current directory
+
+

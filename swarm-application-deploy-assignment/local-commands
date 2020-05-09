@@ -1,0 +1,34 @@
+-- Run commands from this directory
+
+## Optional
+docker pull bretfisher/examplevotingapp_worker
+docker pull bretfisher/examplevotingapp_worker:java
+
+## Create networks - creates a network with the bridge driver by default
+docker network create frontend
+docker network create backend
+
+## Running vote application
+docker container run --name vote -d --net frontend -p 80:80 bretfisher/examplevotingapp_vote
+
+## Running redis cache
+docker run --name redis -d --network frontend redis:3.2
+
+## Running worker java application
+docker container run --name worker -d --net frontend bretfisher/examplevotingapp_worker:java
+
+## Connecting the worker application to the backend too
+docker network connect backend worker
+
+## Running postgres db
+docker container run --name db \
+-v $(pwd)/postgres/data:/var/lib/postgresql/ \
+-e POSTGRES_PASSWORD=   \
+-e POSTGRES_HOST_AUTH_METHOD=trust           \
+--net backend -d postgres:9.4
+
+## Running the result app
+docker run --name result -p 5001:80 --net backend bretfisher/examplevotingapp_result
+
+## To check the log of each service, use
+docker service logs vote

@@ -1,0 +1,2 @@
+## Deploy a stack (docker-compose for swarm)
+docker stack deploy -c docker-secret.yml mydb

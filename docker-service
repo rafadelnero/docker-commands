@@ -1,0 +1,20 @@
+## Creates a service named as psql in the network of mydrupal
+docker service create --name psql --network mydrupal -e POSTGRES_PASSWORD=secret postgres
+
+docker service create --name drupal --network mydrupal -p 80:80 drupal
+
+docker service create --name search --replicas 3 -p 9200:9200 elasticsearch:2
+
+## Creates a nginx service
+docker service create -p 8070:80 --name web nginx:1.13.7
+
+## Scales a service
+docker service scale web=5
+
+## Updates a service
+docker service update --image nginx:1.13.6 web
+
+docker service update --publish-rm 8088 --publish-add 9090:80 web
+
+## Forces the update
+docker service update --force web

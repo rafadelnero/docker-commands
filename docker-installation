@@ -1,0 +1,10 @@
+## To install docker in the cloud, we can use the following link:
+https://get.docker.com/
+
+Then we can save this script into a sh file, example docker-install.sh
+
+Finally we can execute this file by using the following command:
+chmod +x ./docker-install.sh
+
+Then
+./docker-install.sh

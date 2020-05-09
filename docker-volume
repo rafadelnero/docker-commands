@@ -1,0 +1,8 @@
+## Lists volumes
+docker volume ls
+
+docker volume inspect mysql-db
+
+docker volume create --help
+
+docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True -v mysql-db:/var/lib/mysql mysql

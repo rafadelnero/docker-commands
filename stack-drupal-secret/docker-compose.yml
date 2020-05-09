@@ -1,0 +1,45 @@
+version: "3.1"
+
+services:
+
+  drupal:
+    image: drupal:8.2
+    ports:
+      - "8080:80"
+    volumes:
+      - drupal_modules:/var/www/html/modules
+      - drupal_profiles:/var/www/html/profiles
+      - drupal_themes:/var/www/html/themes
+      - drupal_sites:/var/www/html/sites
+    restart: always
+
+  postgres:
+    image: postgres:12.1
+    secrets:
+      - psql-usr
+      - psql-pw
+    environment:
+      POSTGRES_USER_FILE: /run/secrets/psql-usr
+      POSTGRES_PASSWORD_FILE: /run/secrets/psql-pw
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    restart: always
+
+secrets:
+  psql-usr:
+    external: true
+  psql-pw:
+    external: true
+
+volumes:
+  drupal_modules:
+  drupal_profiles:
+  drupal_themes:
+  drupal_sites:
+  db_data:
+
+
+
+
+
+

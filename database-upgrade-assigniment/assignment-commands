@@ -1,0 +1,19 @@
+docker run --name postgres-volume -v $(pwd):/var/lib/postgresql/data
+-e POSTGRES_PASSWORD=mysecretpassword -d postgres:9.6.1
+
+Run postgres container and assigning a named volume to it
+docker container run -d --name psql -v psql:/var/lib/postgresql/data postgres:9.6.1
+
+Upgraded postgres version
+docker container run -d --name psql2 -v psql:/var/lib/postgresql/data postgres:9.6.2
+
+Listing volumes
+docker volume ls
+
+Logs container information
+docker container logs psql2
+
+
+
+
+

@@ -1,0 +1,109 @@
+Docker commands
+
+Running Jenkins with docker
+
+docker run -p 8080:8080 -p 50000:50000 -v /var/jenkins_home:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --name jenkins -d jenkins-docker
+
+Add the following steps to ~/.bash_profile
+https://docs.docker.com/compose/completion/
+
+docker version
+
+docker info
+
+New commands in Docker are docker [command] [subcommand] because there are lots of different commands now
+
+A container is a running instance of an image
+
+Run a container in interactive mode
+docker container run -it —rm image_name
+
+When adding —rm to run a container, as soon as we exit the terminal, the container will be removed
+
+Example
+docker container run -it —rm centos:7 bash
+
+docker container ls == docker ps
+
+docker container ls -a shows exited containers as well
+
+Check logs from a container: docker logs webhosttest or new way docker container logs webhosttest
+
+New way to get logs: docker container logs db
+
+Check processes happening inside a container:
+docker container top webhosttest
+
+Remove containers
+docker container rm ids | to force a running container removal we can use -f
+
+Check processes and filter it by mongo
+ps aux | grep mongo
+
+Running mysql with Docker
+docker container run -d -p 3306:3306 --name db -e MYSQL_RANDOM_ROOT_PASSWORD=yes mysql
+
+-d or -detached means that the container won’t be logging everything on the screen when we interact with the container.
+
+docker inspect webhost will return details from how the container was started. All details of how to get the container started.
+
+Shows performance information about containers
+docker container stats
+
+Running Ubuntu container in interactive mode:
+docker container run -it --name ubuntu ubuntu
+
+Start a new container and run bash or sh commands within it
+docker container run -it bash | sh
+
+Go in a running container to execute bash or sh commands
+docker container exec -it bash | sh
+
+Check port and network information
+docker container port webhost
+
+Check IP host:
+docker container inspect --format '{{ .NetworkSettings.IPAddress }}' webhost
+
+Use nginx:alpine for using the ping command
+
+Show networks
+docker network ls
+
+Inspect a specific kind of network
+docker network inspect bridge
+
+Create a network
+docker network create my_app_net
+
+When using —help after a command, we can see what command we can use
+
+docker network connect [network_id] [container_id]
+
+docker network disconnect 994ff5b02db4 f76fc0743575
+
+By using docker container inspect f76fc0743575 we can check in what network the container is in
+
+Check if containers are connected in the network
+docker container exec -it my_nginx ping new_nginx
+
+Containers can’t rely on IP addresses for communicating, instead they should use DNS
+
+Use the alpine:3.10 for the classes
+
+
+
+Tagging an image:
+docker image tag rafatest rafadelnero/nginx
+
+Then pushing it to docker hub
+docker push rafadelnero/nginx
+
+Create a tag from a tag:
+docker image tag rafadelnero/nginx rafadelnero/nginx:testing
+
+Then push it to docker hub
+
+There is image cache once it's created
+
+docker container run -p 80:80 --rm nginx-with-html

@@ -1,0 +1,12 @@
+
+
+docker container run -d --net catwoman --net-alias search elasticsearch:2
+
+## Creates a registry
+docker container run -d -p 5000:5000 --name registry registry
+
+## Creates a registry with a new database
+docker container run -d -p 5000:5000 --name registry -v $(pwd)/registry-data:/var/lib/registry registry
+
+## Lists the registry data after pushing an image to it
+ll registry-data

@@ -1,0 +1,19 @@
+## Run the registry image
+docker container run -d -p 5000:5000 --name registry -v $(pwd)/registry-data:/var/lib/registry registry
+
+## Tags image
+docker tag hello-world 127.0.0.1:5000/hello-world
+
+## Pushes an image after being tagged
+docker push 127.0.0.1:5000/hello-world
+
+## Remove images from local cache
+docker image rm hello-world
+docker image rm 127.0.0.1/5000/hello-world
+docker pull 127.0.0.1:5000/hello-world
+
+## Creates a registry with a new database
+docker container run -d -p 5000:5000 --name registry -v $(pwd)/registry-data:/var/lib/registry registry
+
+## Lists the registry data after pushing an image to it
+ll registry-data

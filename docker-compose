@@ -1,0 +1,11 @@
+Check up servers with docker-compose
+docker-compose ps
+
+Spin up a container with docker-compose
+docker-compose up
+
+Spin down a container with docker-compose
+docker-compose down
+
+Removes the compose container along with the volume
+docker-compose down -v

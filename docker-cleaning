@@ -1,0 +1,34 @@
+## Cleans dangling images
+docker image prune
+
+## Removes Volumes
+docker volume prune
+
+## Removes all volumes
+docker system prune --volumes
+
+## Removes all images
+docker image prune -a
+
+## Cleans up everything
+docker system prune
+
+## Removes a container
+docker rm container_id
+
+## Removes an image
+docker rmi image_id
+
+## Removes stopped containers
+docker container prune
+
+docker-compose down -v --rmi local
+
+## Stop all containers
+docker container stop $(docker container ls -aq)
+Then remove all containers forcefully
+docker container rm $(docker container ls -aq) -f
+
+## Removes all services on docker
+docker service rm $(docker service ls -q)
+

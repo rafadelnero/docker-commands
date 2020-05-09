@@ -1,0 +1,6 @@
+## Run container and pass custom files to the container
+docker container run -d --name nginx -p 80:80 -v $(pwd):/usr/share/nginx/html nginx
+
+$(pwd) == the current manipulated directory
+
+docker container exec -it nginx bash
