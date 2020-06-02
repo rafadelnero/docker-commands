@@ -54,10 +54,10 @@ Running Ubuntu container in interactive mode:
 docker container run -it --name ubuntu ubuntu
 
 Start a new container and run bash or sh commands within it
-docker container run -it bash | sh
+docker container run -it [container_name] bash | sh
 
 Go in a running container to execute bash or sh commands
-docker container exec -it bash | sh
+docker container exec -it [container_name] bash | sh
 
 Check port and network information
 docker container port webhost
