@@ -10,3 +10,12 @@ docker container run -d -p 5000:5000 --name registry -v $(pwd)/registry-data:/va
 
 ## Lists the registry data after pushing an image to it
 ll registry-data
+
+
+## Runs a container, detaches it and sets the mysql name to the mysql image
+docker container run -d --name mysql mysql
+
+## Running mysql with an environment variable and a named volume
+docker container run -d --name mysql -e MYSQL_ALLOW_EMPTY_PASSWORD=True -v mysql-db:/var/lib/mysql mysql
+
+docker container run -e POSTGRES_PASSWORD=mysecretpassword postgres

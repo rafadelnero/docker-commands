@@ -1,5 +1,3 @@
-
-
 Tagging an image:
 docker image tag rafatest rafadelnero/nginx
 

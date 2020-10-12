@@ -27,9 +27,9 @@ docker container ls == docker ps
 
 docker container ls -a shows exited containers as well
 
-Check logs from a container: docker logs webhosttest or new way docker container logs webhosttest
+Check logs from a container: docker logs webhosttest or new way docker container logs webhosttest
 
-New way to get logs: docker container logs db
+New way to get logs:docker container logs db
 
 Check processes happening inside a container:
 docker container top webhosttest
@@ -90,8 +90,6 @@ docker container exec -it my_nginx ping new_nginx
 Containers can’t rely on IP addresses for communicating, instead they should use DNS
 
 Use the alpine:3.10 for the classes
-
-
 
 Tagging an image:
 docker image tag rafatest rafadelnero/nginx
